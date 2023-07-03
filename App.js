@@ -13,13 +13,13 @@ const app = express();
 app.use(BodyParser.json())
 app.use(BodyParser.urlencoded({ extended: false }))
 
-mongoose.connect("mongodb://127.0.0.1:27017/TaskDb");
+mongoose.connect(config.MongoDBConnection);
 
 // Function to verify whether token is valid or invalid or exists or not.
 const AuthToken = (req, res, next) => {
     const Token = req.headers.authorization;
     // const token = req.headers.authorization;
-    const tokenValue = Token.split(' ')[1];
+    const tokenValue = Token.split(' ')[1]; //To split the token with bearer keyword
 
     // console.log(Token);
 
@@ -140,7 +140,7 @@ app.post("/register", (req, res) => {
         })
 })
 
-app.get("/", (req, res) => { //TO check the server
+app.get("/", (req, res) => { //To check the server
     res.send("Hello")
 })
 
